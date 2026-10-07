@@ -2,6 +2,10 @@
 
 En una Universidad de un país latinoamericano se necesita un sistema que permita realizar la inscripción a materias. En esta universidad se tiene un único curso de cada materia y sólo se maneja información de un cuatrimestre (no se consideran inscripciones anteriores). En cambio, sí se debe conocer el historial de materias aprobadas de una persona estudiante, junto con la nota que obtuvo.
 
+
+
+
+
 ## Parte 1 Inscripción a carreras
 
 Una persona estudiante se puede inscribir a una o más carreras.
@@ -31,6 +35,16 @@ Escenario
 3. Verificar que Bases de Datos es una de las materias de las carreras a la cual está inscripta _Alex_
 4. Verificar que Psicología no es una de las materias de las carreras a la cual está inscripta _Alex_
 5. Intentar inscribir a _Alex_ a programación, no se puede porque ya está inscripta
+
+
+
+
+
+
+
+
+
+
 
 
 ## Parte 2 Historia académica
