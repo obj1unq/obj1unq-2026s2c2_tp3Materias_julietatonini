@@ -21,6 +21,9 @@ Construir un modelo que permita resolver los siguientes requerimientos:
 
 3. Saber si una materia pertenece a alguna de las carreras a las cuales está inscripta una persona estudiante 
 
+
+
+
 ### Casos de ejemplo
 
 En los ejemplos incluiremos tres carreras: _Programación_, _Tecnicatura en Economía Social y solidaria(TUESS)_ y _Terapia Ocupacional (TO)_.

@@ -1,0 +1,31 @@
+import materias.*
+
+describe "tests de materias" {
+
+  const epl = new Materia()
+
+  const mate1 = new Materia()
+
+  const objetos1 = new Materia()
+
+  const objetos2 = new Materia()
+
+  const objetos3 = new Materia()
+
+  const baseDeDatos = new Materia()
+
+  const pConc = new Materia()
+
+
+
+  const programación = new Carrera(
+    materias = #{epl, mate1, objetos1, objetos2, objetos3, baseDeDatos, pConc}
+  ) 
+  
+
+
+  test "Inscripción a carreras" {
+    
+  }
+
+}
