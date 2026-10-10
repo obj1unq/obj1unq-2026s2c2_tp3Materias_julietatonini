@@ -16,6 +16,11 @@ class Estudiante {
   }
 
 
+  method estaInscriptoEn(carrera){
+    return carreras.contains(carrera)
+  }
+
+
   method carreras(){
     return carreras
   }
@@ -24,6 +29,7 @@ class Estudiante {
   method esMateriaDeAlgunaCarrera(materia){
     return carreras.any({carrera => carrera.esMateriaDeLaCarrera(materia)})  
   }
+
 
   
 }

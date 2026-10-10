@@ -1,0 +1,71 @@
+import materias.*
+
+describe "tests de materias" {
+
+  const epl = new Materia()
+
+  const mate1 = new Materia()
+
+  const objetos1 = new Materia()
+
+  const objetos2 = new Materia()
+
+  const objetos3 = new Materia()
+
+  const baseDeDatos = new Materia()
+
+  const pConc = new Materia()
+
+  const mEyA = new Materia()
+
+  const tyS = new Materia()
+
+  const economia = new Materia()
+
+  const desarrolloLocal = new Materia()
+
+  const lEA = new Materia()
+
+  const cienciasSalud = new Materia()
+
+  const psicologia = new Materia()
+
+  const antropologia = new Materia()
+
+  const sociologia = new Materia()
+
+
+
+
+
+
+  const programación = new Carrera(
+    materias = #{epl, mate1, objetos1, objetos2, objetos3, baseDeDatos, pConc}
+  ) 
+
+  const tecEconomia = new Carrera(
+    materias = #{mEyA, tyS, economia, desarrolloLocal}
+  )
+
+  const terapiaO = new Carrera(
+    materias = #{lEA, cienciasSalud, psicologia, antropologia, sociologia}
+  )
+
+
+  const alex = new Estudiante()
+  
+
+
+
+  test "Inscripción a carreras" {
+    alex.inscribirseACarrera(programación)
+    alex.inscribirseACarrera(tecEconomia)
+    assert.that(alex.estaInscriptoEn(programación))
+    assert.that(alex.estaInscriptoEn(tecEconomia))
+    assert.notThat(alex.estaInscriptoEn(terapiaO))
+    assert.that(alex.esMateriaDeAlgunaCarrera(baseDeDatos))
+    assert.notThat(alex.esMateriaDeAlgunaCarrera(psicologia))
+    assert.throwsException({alex.inscribirseACarrera(programación)})
+  }
+
+}
