@@ -187,6 +187,7 @@ Además, se determinan los siguientes requisitos:
 
 Andy es una persona estudiante que está inscripta en la carrera de Programación y tiene aprobado obj1 con 10 y mate1 con 10.
 
+
 1. Verificar que Alex podría inscribirse a Objetos 2, pues tiene aprobadas Objetos 1 y Matemática 1, además de estar en la carrera de programación.
 2. Verificar que en la carrera de Programación, las materias a las que puede inscribirse Alex son epl, obj2 y bd 
 3. Verificar que en la carrera de TUESS, la única materia en que se puede inscribirse Alex es MEyA.

@@ -125,7 +125,7 @@ class Estudiante {
 
 
   method inscriptoEnLaMateria(materia){
-    return historiaAcadémica.estaInscriptoEnMateria(materia)
+    return materia.estudiantesInscriptos().contains(self)
   }
 
 
@@ -136,14 +136,21 @@ class Estudiante {
 
   method inscribirAMateria(materia){
     if (self.puedeInscribirseAMateria(materia)) {
-      historiaAcadémica.inscriptoEnMaterias(materia)
+      historiaAcadémica.inscribirAlEstudianteEnLaMateria(materia)
+      materia.inscribirAEstudiante(self)
+    } else {
+      self.error("el estudiante no puede inscribirse a esta materia")
     }
   }
 
 
+
   method materiasHabilitadasDeLaCarrera(carrera){
-    return carrera.materias().filter({materia => self.aproboTodosLosRequisitosDe(materia)})
+    self.validarQueEstaInscriptoEn(carrera)
+    return carrera.materias().filter({materia => self.puedeInscribirseAMateria(materia)})
   }
+
+ 
   
 
 }
@@ -172,13 +179,26 @@ class Materia {
 
     var requisitos = #{}
 
+    const estudiantesInscriptos = #{}
+
 
     method requisitos(_requisitos) {
-        requisitos = _requisitos}
+        requisitos = _requisitos
+    }
 
 
     method requisitos(){
       return requisitos
+    }
+
+
+    method inscribirAEstudiante(estudiante){
+      estudiantesInscriptos.add(estudiante)
+    }
+
+
+    method estudiantesInscriptos(){
+      return estudiantesInscriptos
     }
 
 }
@@ -267,7 +287,11 @@ class HistoriaAcadémica {
   method estaInscriptoEnMateria(materia){
     return inscriptoEnMaterias.contains(materia)
   }
-   
+  
+
+  method inscribirAlEstudianteEnLaMateria(materia){
+    inscriptoEnMaterias.add(materia)
+  }
 
  
 }

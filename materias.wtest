@@ -54,6 +54,8 @@ describe "tests de materias" {
 
   var alex = new Estudiante()
 
+  var andy = new Estudiante()
+
 
   method initialize() {
     alex = new Estudiante()
@@ -67,6 +69,17 @@ describe "tests de materias" {
     alex.finalizarLaCursada(tyS, 8)
     alex.finalizarLaCursada(mate1, 8)
     alex.finalizarLaCursada(baseDeDatos, 2)
+    objetos2.requisitos(#{objetos1, mate1})
+    objetos3.requisitos(#{objetos2, baseDeDatos})
+    pConc.requisitos(#{objetos1, baseDeDatos})
+    desarrolloLocal.requisitos(#{mEyA})
+
+    andy = new Estudiante()
+
+    andy.inscribirseACarrera(programación)
+
+    andy.finalizarLaCursada(objetos1, 10)
+    andy.finalizarLaCursada(mate1, 10)
   }
 
 
@@ -98,6 +111,53 @@ describe "tests de materias" {
     assert.equals(2, alex.todasLasCursadasDe(mate1).size())
     assert.equals(2, alex.todasLasCursadasDe(mate1).first().nota())
     assert.equals(8, alex.todasLasCursadasDe(mate1).get(1).nota())
+  }
+
+
+
+  test "Alex puede inscribirse a Objetos 2"{
+    assert.that(alex.puedeInscribirseAMateria(objetos2))
+  }
+
+
+  test "Materias de programación en las que Alex se puede inscribir"{
+    assert.equals(#{epl, objetos2, baseDeDatos}, alex.materiasHabilitadasDeLaCarrera(programación))
+  }
+
+
+  test "Alex solo se puede inscribir en una materia de TUESS"{
+    assert.equals(#{mEyA}, alex.materiasHabilitadasDeLaCarrera(tecEconomia))
+  }
+
+
+  test "Alex no puede inscribirse a una materia de una carrera en la cual no está inscripto"{
+    assert.notThat(alex.puedeInscribirseAMateria(psicologia))
+    assert.throwsException({alex.inscribirAMateria(psicologia)})
+  }
+
+
+  test "Alex no puede inscribirse en una materia que ya aprobó"{
+    assert.notThat(alex.puedeInscribirseAMateria(economia))
+    assert.throwsException({alex.inscribirAMateria(economia)})
+  }
+
+
+  test "Alex no puede inscribirse en una materia que tiene correlativas"{
+    assert.notThat(alex.puedeInscribirseAMateria(desarrolloLocal))
+    assert.throwsException({alex.inscribirAMateria(desarrolloLocal)})
+  }
+
+
+  test "Alex no se puede inscribir dos veces a la misma materia"{
+    alex.inscribirAMateria(objetos2)
+    assert.throwsException({alex.inscribirAMateria(objetos2)})
+  }
+
+
+  test "los estudiantes inscriptos en Objetos 2"{
+    alex.inscribirAMateria(objetos2)
+    andy.inscribirAMateria(objetos2)
+    assert.equals(#{alex, andy}, objetos2.estudiantesInscriptos())
   }
 
 
