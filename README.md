@@ -58,8 +58,7 @@ Si la nota es entre 6 y 10 entonces está aprobada.
 ### Requerimientos
 
 
-1. Registrar que una persona estudiante finalizó la cursada de una materia indicando la nota obtenida. Para poder cumplir el requerimiento
-es importante que la nota sea entre 1 y 10 y la persona no haya aprobado previamente la materia. También se debe validar que la materia pertenezca a alguna de las carreras a la cual está inscripta (resuelto en el punto anterior)
+1. Registrar que una persona estudiante finalizó la cursada de una materia indicando la nota obtenida. Para poder cumplir el requerimiento es importante que la nota sea entre 1 y 10 y la persona no haya aprobado previamente la materia. También se debe validar que la materia pertenezca a alguna de las carreras a la cual está inscripta (resuelto en el punto anterior)
 
     > **Tip**: La nota con la que la persona aprobó una materia no puede ser un atributo de la persona (porque la persona tiene muchas notas) ni de la materia (porque una materia es cursada por muchas personas). Es necesario pensar una abstracción que modele la situación: "Alex cursó matemática 1 con nota 10"  
 
@@ -70,6 +69,10 @@ es importante que la nota sea entre 1 y 10 y la persona no haya aprobado previam
 4. Conocer para una persona la cantidad de materias aprobadas y el promedio de las materias aprobadas **en todas sus carreras**. 
 
 5. Saber para una persona todas las cursadas de una materia en el orden en que fueron registradas.
+
+
+
+
 
 ### Casos de prueba
 Teniendo en cuenta las inscripciones a carreras del punto anterior:
@@ -94,6 +97,21 @@ Teniendo en cuenta las inscripciones a carreras del punto anterior:
 12. Verificar que la historia de cursadas de Alex para mate 1 es una cursada con 2, y luego otra con 8.
 
     > **Tip**: Usar un `method initialize()` en el describe para no repetir el escenario inicial con el test del punto anterior
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 ## Parte 3 Inscripciones a las materias
