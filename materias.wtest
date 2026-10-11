@@ -52,14 +52,26 @@ describe "tests de materias" {
   )
 
 
-  const alex = new Estudiante()
-  
+  var alex = new Estudiante()
+
+
+  method initialize() {
+    alex = new Estudiante()
+
+    alex.inscribirseACarrera(programación)
+    alex.inscribirseACarrera(tecEconomia)
+
+    alex.finalizarLaCursada(mate1, 2)
+    alex.finalizarLaCursada(objetos1, 10)
+    alex.finalizarLaCursada(economia, 6)
+    alex.finalizarLaCursada(tyS, 8)
+    alex.finalizarLaCursada(mate1, 8)
+    alex.finalizarLaCursada(baseDeDatos, 2)
+  }
 
 
 
   test "Inscripción a carreras" {
-    alex.inscribirseACarrera(programación)
-    alex.inscribirseACarrera(tecEconomia)
     assert.that(alex.estaInscriptoEn(programación))
     assert.that(alex.estaInscriptoEn(tecEconomia))
     assert.notThat(alex.estaInscriptoEn(terapiaO))
@@ -67,5 +79,27 @@ describe "tests de materias" {
     assert.notThat(alex.esMateriaDeAlgunaCarrera(psicologia))
     assert.throwsException({alex.inscribirseACarrera(programación)})
   }
+
+
+
+
+  test "Historia académica"{
+    assert.throwsException({alex.finalizarLaCursada(mate1, 7)})
+    assert.throwsException({alex.finalizarLaCursada(baseDeDatos, 12)})
+    assert.that(alex.aproboLaMateria(mate1))
+    assert.notThat(alex.aproboLaMateria(baseDeDatos))
+    assert.equals(9, alex.promedioMateriasAprobadasDeCarrera(programación))
+    assert.equals(2, alex.cantMateriasAprobadasDeCarrera(programación))
+    assert.equals(7, alex.promedioMateriasAprobadasDeCarrera(tecEconomia))
+    assert.throwsException({alex.promedioMateriasAprobadasDeCarrera(terapiaO)})
+    alex.inscribirseACarrera(terapiaO)
+    assert.throwsException({alex.promedioMateriasAprobadasDeCarrera(terapiaO)})
+    assert.equals(8, alex.promedioMateriasAprobadasEnTotal())
+    assert.equals(2, alex.todasLasCursadasDe(mate1).size())
+    assert.equals(2, alex.todasLasCursadasDe(mate1).first().nota())
+    assert.equals(8, alex.todasLasCursadasDe(mate1).get(1).nota())
+  }
+
+
 
 }
