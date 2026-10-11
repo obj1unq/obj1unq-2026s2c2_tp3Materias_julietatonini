@@ -5,6 +5,7 @@ class Estudiante {
   const historiaAcadémica = new HistoriaAcadémica()
 
 
+
   method inscribirseACarrera(carrera){
     self.validarInscripcion(carrera)
     carreras.add(carrera)
@@ -112,7 +113,39 @@ class Estudiante {
   method todasLasCursadasDe(materia){
     return historiaAcadémica.todasLasCursadasDeLaMateria(materia)
   }
+
+
+
+  method puedeInscribirseAMateria(materia){
+    return self.esMateriaDeAlgunaCarrera(materia) and     // _m_ corresponde a una carrera de _e_
+    not self.aproboLaMateria(materia)             and     // _e_ no puede haber aprobado _m_ previamente
+    not self.inscriptoEnLaMateria(materia)        and     // _e_ no debe estar ya inscripta en _m_
+    self.aproboTodosLosRequisitosDe(materia)              // _e_ tiene aprobadas las materias _requisitos_ de _m_
+  }
+
+
+  method inscriptoEnLaMateria(materia){
+    return historiaAcadémica.estaInscriptoEnMateria(materia)
+  }
+
+
+  method aproboTodosLosRequisitosDe(materia) {
+    return materia.requisitos().all({requisito => self.aproboLaMateria(requisito)})
+  }
+
+
+  method inscribirAMateria(materia){
+    if (self.puedeInscribirseAMateria(materia)) {
+      historiaAcadémica.inscriptoEnMaterias(materia)
+    }
+  }
+
+
+  method materiasHabilitadasDeLaCarrera(carrera){
+    return carrera.materias().filter({materia => self.aproboTodosLosRequisitosDe(materia)})
+  }
   
+
 }
 
 
@@ -136,6 +169,17 @@ class Carrera {
 
 
 class Materia {
+
+    var requisitos = #{}
+
+
+    method requisitos(_requisitos) {
+        requisitos = _requisitos}
+
+
+    method requisitos(){
+      return requisitos
+    }
 
 }
 
@@ -167,6 +211,9 @@ class HistoriaAcadémica {
 
   const property cursadas = [] 
 
+  const property inscriptoEnMaterias = #{}
+
+
 
   method esMateriaAprobada(materia){
     return materiasAprobadas.contains(materia)
@@ -175,6 +222,7 @@ class HistoriaAcadémica {
 
   method registrarCursada(cursada){
     cursadas.add(cursada)
+    inscriptoEnMaterias.remove(cursada.materia())
     self.agregarMateriaSiEsAprobada(cursada)
   }
 
@@ -215,6 +263,10 @@ class HistoriaAcadémica {
     return cursadas.filter({cursada => cursada.materia() == materia})
   }
 
+
+  method estaInscriptoEnMateria(materia){
+    return inscriptoEnMaterias.contains(materia)
+  }
    
 
  

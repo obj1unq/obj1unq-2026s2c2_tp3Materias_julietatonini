@@ -116,8 +116,7 @@ Teniendo en cuenta las inscripciones a carreras del punto anterior:
 
 ## Parte 3 Inscripciones a las materias
 
-El sistema permite administrar las inscripciones a las materias para el cuatrimestre actual. El objetivo de este proceso es obtener para cada
-materia la colección de estudiantes que se inscribieron.
+El sistema permite administrar las inscripciones a las materias para el cuatrimestre actual. El objetivo de este proceso es obtener para cada materia la colección de estudiantes que se inscribieron.
 
 Las materias de las carreras pueden establecer _requisitos_ para aceptar una persona estudiante. Los
 _requisitos_ son otras materias que deberían haber cursado previamente:
@@ -137,14 +136,15 @@ const obj2 = new Materia(requisitos=#{obj1, mate1})
 hay que tener cuidado que obj1 y mate1 también se hayan instanciado antes. Esas materias también podrían necesitar requisitos que son otras materias también deben instanciarse antes!. Esta estrategia  funciona porque las dependencias, en este caso concreto, forman un árbol: siempre se pueden instanciar los requisitos antes que la materia que los necesita. Hay que tener mucho cuidado del orden en que se instancia.
 
 Pero en muchas situaciones parecidas, las dependencias entre instancias pueden ser cíclicas: A necesita B , B necesita a C y C necesita A. 
-En un caso así, no es posible configurar en la instanciación. Una estrategia más simple en la cual no es necesario pensar el orden
-en que se instancian es dividir la construcción en dos fases: primero se instancian todas las materias y se usa un atributo variable sin pasarle un valor inicial en el new. Luego se configuran los requisitos con un setter.
+En un caso así, no es posible configurar en la instanciación. Una estrategia más simple en la cual no es necesario pensar el orden en que se instancian es dividir la construcción en dos fases: primero se instancian todas las materias y se usa un atributo variable sin pasarle un valor inicial en el new. Luego se configuran los requisitos con un setter.
 
 ```
 
 class Materia {
     var requisitos = #{}
-    method requisitos(_values) {requisitos = _values}
+
+    method requisitos(_values) {
+        requisitos = _values}
 }
 
 const obj2 = new Materia()
@@ -158,7 +158,7 @@ obj2.requisitos(#{obj1, mate1})
 
 1. Determinar si una persona estudiante _e_ puede inscribirse a una materia _m_. Para esto se deben cumplir cuatro condiciones: 
 
-    - _m_ debe corresponder a alguna de las carreras en la que está inscripta _e_, 
+    - _m_ debe corresponder a alguna de las carreras en la que está inscripto _e_, 
     - _e_ no puede haber aprobado _m_ previamente, 
     - _e_ no debe estar ya inscripta en _m_,
     - _e_ debe tener aprobadas todas las materias que se declaran como _requisitos_ de _m_.  
@@ -167,6 +167,10 @@ obj2.requisitos(#{obj1, mate1})
 2. Inscribir una persona _e_ a una materia _m_, validando las condiciones de inscripción de la materia. 
 
 3. Materias habilitadas en una carrera: dada una carrera y un estudiante, conocer todas las materias de esa carrera a las que se puede inscribir el estudiante, teniendo en cuenta todas las restricciones del punto 1.
+
+
+
+
 
 
 
@@ -196,6 +200,16 @@ Andy es una persona estudiante que está inscripta en la carrera de Programació
 11. Intentar inscribir a Alex nuevamente en Obj2, no se puede porque ya está inscripta  
 12. Realizar la inscripción de Andy a Obj2.
 13. Verificar que las personas estudiantes inscriptas en Obj2 son Alex y Andy
+
+
+
+
+
+
+
+
+
+
 
 
 ## Parte 4: Distintos tipos de requisitos
