@@ -2,37 +2,101 @@ import materias.*
 
 describe "tests de materias" {
 
-  const epl = new Materia()
+  const epl = new Materia(
+    requisito = sinRequisitos,
+    creditosQueOtorga = 0,
+    añoDeCarrera = 0
+  )
 
-  const mate1 = new Materia()
+  const mate1 = new Materia(
+    requisito = sinRequisitos,
+    creditosQueOtorga = 8,
+    añoDeCarrera = 1
+  )
 
-  const objetos1 = new Materia()
+  const objetos1 = new Materia(
+    requisito = sinRequisitos,
+    creditosQueOtorga = 8,
+    añoDeCarrera = 1
+  )
 
-  const objetos2 = new Materia()
+  const objetos2 = new Materia(
+    requisito = sinRequisitos,
+    creditosQueOtorga = 0,
+    añoDeCarrera = 0
+  )
 
-  const objetos3 = new Materia()
+  const objetos3 = new Materia(
+    requisito = sinRequisitos,
+    creditosQueOtorga = 0,
+    añoDeCarrera = 0
+  )
 
-  const baseDeDatos = new Materia()
+  const baseDeDatos = new Materia(
+    requisito = sinRequisitos,
+    creditosQueOtorga = 8,
+    añoDeCarrera = 1
+  )
 
-  const pConc = new Materia()
+  const pConc = new Materia(
+    requisito = sinRequisitos,
+    creditosQueOtorga = 0,
+    añoDeCarrera = 0
+  )
 
-  const mEyA = new Materia()
+  const mEyA = new Materia(
+    requisito = sinRequisitos,
+    creditosQueOtorga = 0,
+    añoDeCarrera = 0
+  )
 
-  const tyS = new Materia()
+  const tyS = new Materia(
+    requisito = sinRequisitos,
+    creditosQueOtorga = 0,
+    añoDeCarrera = 0
+  )
 
-  const economia = new Materia()
+  const economia = new Materia(
+    requisito = sinRequisitos,
+    creditosQueOtorga = 0,
+    añoDeCarrera = 0
+  )
 
-  const desarrolloLocal = new Materia()
+  const desarrolloLocal = new Materia(
+    requisito = sinRequisitos,
+    creditosQueOtorga = 0,
+    añoDeCarrera = 0
+  )
 
-  const lEA = new Materia()
+  const lEA = new Materia(
+    requisito = sinRequisitos,
+    creditosQueOtorga = 8,
+    añoDeCarrera = 1
+  )
 
-  const cienciasSalud = new Materia()
+  const cienciasSalud = new Materia(
+    requisito = sinRequisitos,
+    creditosQueOtorga = 8,
+    añoDeCarrera = 1
+  )
 
-  const psicologia = new Materia()
+  const psicologia = new Materia(
+    requisito = porAño,
+    creditosQueOtorga = 4,
+    añoDeCarrera = 2
+  )
 
-  const antropologia = new Materia()
+  const antropologia = new Materia(
+    requisito = creditos,    //8
+    creditosQueOtorga = 4,
+    añoDeCarrera = 2
+  )
 
-  const sociologia = new Materia()
+  const sociologia = new Materia(
+    requisito = creditos,       //10
+    creditosQueOtorga = 8,
+    añoDeCarrera = 3
+  )
 
 
 
@@ -162,4 +226,8 @@ describe "tests de materias" {
 
 
 
+  test "parte 4: distintos tipos de requisitos"{
+    andy.inscribirseACarrera(terapiaO)
+    assert.equals(#{lEA, cienciasSalud}, andy.materiasHabilitadasDeLaCarrera(terapiaO))
+  }
 }
