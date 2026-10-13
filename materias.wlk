@@ -6,6 +6,7 @@ class Estudiante {
 
 
 
+
   method inscribirseACarrera(carrera){
     self.validarInscripcion(carrera)
     carreras.add(carrera)
@@ -150,6 +151,11 @@ class Estudiante {
     return carrera.materias().filter({materia => self.puedeInscribirseAMateria(materia)})
   }
 
+
+  method creditosObtenidos(){
+    return historiaAcadémica.creditosTotales()
+  }
+
  
   
 
@@ -177,20 +183,19 @@ class Carrera {
 
 class Materia {
 
-    var requisitos = #{}
+    const property requisito
 
     const estudiantesInscriptos = #{}
 
+    const property creditosQueOtorga 
 
-    method requisitos(_requisitos) {
-        requisitos = _requisitos
-    }
+    const property añoDeCarrera
 
 
-    method requisitos(){
-      return requisitos
-    }
-
+    //method cumpleRequisitos(estudiante) {
+    //return requisito.cumplePara(estudiante, self)}
+  
+  
 
     method inscribirAEstudiante(estudiante){
       estudiantesInscriptos.add(estudiante)
@@ -233,6 +238,8 @@ class HistoriaAcadémica {
 
   const property inscriptoEnMaterias = #{}
 
+  var creditosTotales = 0
+
 
 
   method esMateriaAprobada(materia){
@@ -241,16 +248,12 @@ class HistoriaAcadémica {
 
 
   method registrarCursada(cursada){
+    if (cursada.estaAprobada()){
+      materiasAprobadas.add(cursada.materia())
+      creditosTotales += cursada.materia().creditosQueOtorga()   
+    }
     cursadas.add(cursada)
     inscriptoEnMaterias.remove(cursada.materia())
-    self.agregarMateriaSiEsAprobada(cursada)
-  }
-
-
-  method agregarMateriaSiEsAprobada(cursada){
-    if(cursada.estaAprobada()){
-      materiasAprobadas.add(cursada.materia())
-    }
   }
 
 
@@ -293,5 +296,78 @@ class HistoriaAcadémica {
     inscriptoEnMaterias.add(materia)
   }
 
+
+  method creditosTotales(){
+    return creditosTotales
+  }
+
+
  
+}
+
+
+
+
+
+object correlativas{
+
+  var property materiasCorrelativas = #{}
+
+
+  method cumplePara(estudiante, materia) {
+    return materiasCorrelativas.all({materia => estudiante.aproboLaMateria(materia)})
+  }
+
+}
+
+
+
+
+
+object creditos{
+
+  var creditosNecesarios = 0
+
+
+  method cumplePara(estudiante, materia) {
+    return estudiante.creditosObtenidos() >= self.creditosNecesarios()
+  }
+
+
+  method creditosNecesarios(){
+    return creditosNecesarios
+  }
+
+  method creditosNecesarios(_creditos){
+    creditosNecesarios = _creditos
+  }
+
+}
+
+
+
+
+
+object porAño{
+
+
+  method cumplePara(estudiante, materia){
+    return materia.carrera().materias().filter({otraMateria => otraMateria.añoDeCarrera() == materia.añoDeCarrera() - 1}).all({materiaAnterior => estudiante.aproboLaMateria(materiaAnterior)})
+  }
+
+  
+
+}
+
+
+
+
+
+
+object sinRequisitos{
+
+  method cumplePara(estudiante, materia){
+      return true
+  }
+
 }

@@ -230,8 +230,7 @@ Cada materia tiene sólo uno de estos tipos de requisitos: correlativas, crédit
 ### Casos de prueba
 
 #### Correlativas y Sin requisitos
-    Los casos de prueba desarrollados en los puntos anteriores deberían seguir funcionando usando las opciones "sinRequisitos" y "correlativas"
-    según corresponda.
+    Los casos de prueba desarrollados en los puntos anteriores deberían seguir funcionando usando las opciones "sinRequisitos" y "correlativas" según corresponda.
     El año y créditos de las materias son indistintos para estas pruebas, pudiendo usarse cualquier valor por defecto.
 
 #### Créditos y Año
@@ -263,6 +262,13 @@ Cada materia tiene sólo uno de estos tipos de requisitos: correlativas, crédit
     - inscribir a Andy a Sociología
     - verificar que la lista de estudiantes inscriptos a Psicología está compuesta solo por Andy
     - verificar que la lista de estudiantes de Sociología está compuesta solo por Andy
+    
+
+
+
+
+
+
     
 ## Parte 5: Reflexiones sobre la solución
     - Realizar un diagrama dinámico que muestre la relación entre Alex, sus materias cursadas (con la nota) e inscriptas de acuerdo al caso de prueba del punto 3
