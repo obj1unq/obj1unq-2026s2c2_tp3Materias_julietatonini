@@ -24,16 +24,14 @@ const objetos1 = new Materia(
 
 const objetos2 = new Materia(
   requisito = new Correlativas(
-    materiasCorrelativas = #{objetos1, mate1}
-  ),
+    materiasCorrelativas = #{objetos1, mate1}),
   creditosQueOtorga = 0,
   añoDeCarrera = 0
 )
 
 const objetos3 = new Materia(
   requisito = new Correlativas(
-    materiasCorrelativas = #{objetos2, baseDeDatos}
-  ),
+    materiasCorrelativas = #{objetos2, baseDeDatos}),
   creditosQueOtorga = 0,
   añoDeCarrera = 0
 )
@@ -47,8 +45,7 @@ const baseDeDatos = new Materia(
 
 const pConc = new Materia(
   requisito = new Correlativas(
-    materiasCorrelativas = #{objetos1, baseDeDatos}
-  ),
+    materiasCorrelativas = #{objetos1, baseDeDatos}),
   creditosQueOtorga = 0,
   añoDeCarrera = 0
 )
@@ -73,8 +70,7 @@ const economia = new Materia(
 
 const desarrolloLocal = new Materia(
   requisito = new Correlativas(
-    materiasCorrelativas = #{mEyA}
-  ),
+    materiasCorrelativas = #{mEyA}),
   creditosQueOtorga = 0,
   añoDeCarrera = 0
 )
@@ -137,20 +133,15 @@ const sociologia = new Materia(
 
 
   method initialize() {
+    
     alex = new Estudiante()
 
 
-    programación.materias().forEach({materia =>
-  materia.carrera(programación)
-})
+    programación.materias().forEach({materia => materia.carrera(programación)})
 
-tecEconomia.materias().forEach({materia =>
-  materia.carrera(tecEconomia)
-})
+    tecEconomia.materias().forEach({materia => materia.carrera(tecEconomia)})
 
-terapiaO.materias().forEach({materia =>
-  materia.carrera(terapiaO)
-})
+    terapiaO.materias().forEach({materia => materia.carrera(terapiaO)})
 
 
     alex.inscribirseACarrera(programación)
@@ -174,6 +165,8 @@ terapiaO.materias().forEach({materia =>
 
 
 
+// PARTE 1
+
   test "Inscripción a carreras" {
     assert.that(alex.estaInscriptoEn(programación))
     assert.that(alex.estaInscriptoEn(tecEconomia))
@@ -184,6 +177,9 @@ terapiaO.materias().forEach({materia =>
   }
 
 
+
+
+// PARTE 2
 
 
   test "Historia académica"{
@@ -204,6 +200,10 @@ terapiaO.materias().forEach({materia =>
   }
 
 
+
+
+
+// PARTE 3
 
   test "Alex puede inscribirse a Objetos 2"{
     assert.that(alex.puedeInscribirseAMateria(objetos2))
@@ -252,7 +252,11 @@ terapiaO.materias().forEach({materia =>
 
 
 
-  test "parte 4: distintos tipos de requisitos"{
+
+
+// PARTE 4
+
+  test "distintos tipos de requisitos"{
     andy.inscribirseACarrera(terapiaO)
     assert.equals(#{lEA, cienciasSalud}, andy.materiasHabilitadasDeLaCarrera(terapiaO))
     andy.finalizarLaCursada(lEA, 10)

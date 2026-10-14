@@ -268,11 +268,23 @@ Cada materia tiene sólo uno de estos tipos de requisitos: correlativas, crédit
 
 
 
+
+
+
     
 ## Parte 5: Reflexiones sobre la solución
     - Realizar un diagrama dinámico que muestre la relación entre Alex, sus materias cursadas (con la nota) e inscriptas de acuerdo al caso de prueba del punto 3
     - Realizar un diagrama estático que muestre los tipos/clases involucrados que se ven en el diagrama dinámico del punto anterior
     - Mostrar un diagrama estático que refleje el polimorfismo usado en el punto 4 (requisitos de la materia). Aclarar en texto cuál es el mensaje polimórfico, quién es el emisor del mensaje y cuáles son los objetos autodefinidos o clases que lo implementan.
+
+
+
+
+
+
+
+
+
 
 
 # BONUS

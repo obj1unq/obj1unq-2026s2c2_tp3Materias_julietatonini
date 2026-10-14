@@ -155,11 +155,11 @@ class Estudiante {
   method creditosObtenidos(carrera){
     return historiaAcadémica.creditosDeLaCarrera(carrera)
   }
-
- 
   
 
 }
+
+
 
 
 
@@ -177,6 +177,7 @@ class Carrera {
     return materias.contains(materia)
   }
 }
+
 
 
 
@@ -219,9 +220,9 @@ class Materia {
     }
 
 
-
-
 }
+
+
 
 
 
@@ -321,7 +322,6 @@ class HistoriaAcadémica {
   //  return creditosTotales
   //}
 
-
  
 }
 
@@ -381,5 +381,30 @@ object sinRequisitos{
   method cumplePara(estudiante, materia){
       return true
   }
+
+}
+
+
+
+
+object test5 {
+
+   var alex = new Estudiante()
+
+
+   //aca pongo materias y carreras
+
+     method initialize(){
+
+   alex.inscribirseACarrera(programación)
+    alex.inscribirseACarrera(tecEconomia)
+
+    alex.finalizarLaCursada(mate1, 2)
+    alex.finalizarLaCursada(objetos1, 10)
+    alex.finalizarLaCursada(economia, 6)
+    alex.finalizarLaCursada(tyS, 8)
+    alex.finalizarLaCursada(mate1, 8)
+    alex.finalizarLaCursada(baseDeDatos, 2)
+}
 
 }
