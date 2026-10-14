@@ -2,6 +2,10 @@
 
 En una Universidad de un país latinoamericano se necesita un sistema que permita realizar la inscripción a materias. En esta universidad se tiene un único curso de cada materia y sólo se maneja información de un cuatrimestre (no se consideran inscripciones anteriores). En cambio, sí se debe conocer el historial de materias aprobadas de una persona estudiante, junto con la nota que obtuvo.
 
+
+
+
+
 ## Parte 1 Inscripción a carreras
 
 Una persona estudiante se puede inscribir a una o más carreras.
@@ -16,6 +20,9 @@ Construir un modelo que permita resolver los siguientes requerimientos:
 2. Saber las carreras en las que se inscribió una persona estudiante
 
 3. Saber si una materia pertenece a alguna de las carreras a las cuales está inscripta una persona estudiante 
+
+
+
 
 ### Casos de ejemplo
 
@@ -33,6 +40,16 @@ Escenario
 5. Intentar inscribir a _Alex_ a programación, no se puede porque ya está inscripta
 
 
+
+
+
+
+
+
+
+
+
+
 ## Parte 2 Historia académica
 
 Cada vez que una persona estudiante termina de cursar una materia se registra en el sistema indicando su nota. La nota es un valor numérico entre 1 y 10.
@@ -41,8 +58,7 @@ Si la nota es entre 6 y 10 entonces está aprobada.
 ### Requerimientos
 
 
-1. Registrar que una persona estudiante finalizó la cursada de una materia indicando la nota obtenida. Para poder cumplir el requerimiento
-es importante que la nota sea entre 1 y 10 y la persona no haya aprobado previamente la materia. También se debe validar que la materia pertenezca a alguna de las carreras a la cual está inscripta (resuelto en el punto anterior)
+1. Registrar que una persona estudiante finalizó la cursada de una materia indicando la nota obtenida. Para poder cumplir el requerimiento es importante que la nota sea entre 1 y 10 y la persona no haya aprobado previamente la materia. También se debe validar que la materia pertenezca a alguna de las carreras a la cual está inscripta (resuelto en el punto anterior)
 
     > **Tip**: La nota con la que la persona aprobó una materia no puede ser un atributo de la persona (porque la persona tiene muchas notas) ni de la materia (porque una materia es cursada por muchas personas). Es necesario pensar una abstracción que modele la situación: "Alex cursó matemática 1 con nota 10"  
 
@@ -53,6 +69,10 @@ es importante que la nota sea entre 1 y 10 y la persona no haya aprobado previam
 4. Conocer para una persona la cantidad de materias aprobadas y el promedio de las materias aprobadas **en todas sus carreras**. 
 
 5. Saber para una persona todas las cursadas de una materia en el orden en que fueron registradas.
+
+
+
+
 
 ### Casos de prueba
 Teniendo en cuenta las inscripciones a carreras del punto anterior:
@@ -79,10 +99,24 @@ Teniendo en cuenta las inscripciones a carreras del punto anterior:
     > **Tip**: Usar un `method initialize()` en el describe para no repetir el escenario inicial con el test del punto anterior
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ## Parte 3 Inscripciones a las materias
 
-El sistema permite administrar las inscripciones a las materias para el cuatrimestre actual. El objetivo de este proceso es obtener para cada
-materia la colección de estudiantes que se inscribieron.
+El sistema permite administrar las inscripciones a las materias para el cuatrimestre actual. El objetivo de este proceso es obtener para cada materia la colección de estudiantes que se inscribieron.
 
 Las materias de las carreras pueden establecer _requisitos_ para aceptar una persona estudiante. Los
 _requisitos_ son otras materias que deberían haber cursado previamente:
@@ -102,14 +136,15 @@ const obj2 = new Materia(requisitos=#{obj1, mate1})
 hay que tener cuidado que obj1 y mate1 también se hayan instanciado antes. Esas materias también podrían necesitar requisitos que son otras materias también deben instanciarse antes!. Esta estrategia  funciona porque las dependencias, en este caso concreto, forman un árbol: siempre se pueden instanciar los requisitos antes que la materia que los necesita. Hay que tener mucho cuidado del orden en que se instancia.
 
 Pero en muchas situaciones parecidas, las dependencias entre instancias pueden ser cíclicas: A necesita B , B necesita a C y C necesita A. 
-En un caso así, no es posible configurar en la instanciación. Una estrategia más simple en la cual no es necesario pensar el orden
-en que se instancian es dividir la construcción en dos fases: primero se instancian todas las materias y se usa un atributo variable sin pasarle un valor inicial en el new. Luego se configuran los requisitos con un setter.
+En un caso así, no es posible configurar en la instanciación. Una estrategia más simple en la cual no es necesario pensar el orden en que se instancian es dividir la construcción en dos fases: primero se instancian todas las materias y se usa un atributo variable sin pasarle un valor inicial en el new. Luego se configuran los requisitos con un setter.
 
 ```
 
 class Materia {
     var requisitos = #{}
-    method requisitos(_values) {requisitos = _values}
+
+    method requisitos(_values) {
+        requisitos = _values}
 }
 
 const obj2 = new Materia()
@@ -123,7 +158,7 @@ obj2.requisitos(#{obj1, mate1})
 
 1. Determinar si una persona estudiante _e_ puede inscribirse a una materia _m_. Para esto se deben cumplir cuatro condiciones: 
 
-    - _m_ debe corresponder a alguna de las carreras en la que está inscripta _e_, 
+    - _m_ debe corresponder a alguna de las carreras en la que está inscripto _e_, 
     - _e_ no puede haber aprobado _m_ previamente, 
     - _e_ no debe estar ya inscripta en _m_,
     - _e_ debe tener aprobadas todas las materias que se declaran como _requisitos_ de _m_.  
@@ -132,6 +167,10 @@ obj2.requisitos(#{obj1, mate1})
 2. Inscribir una persona _e_ a una materia _m_, validando las condiciones de inscripción de la materia. 
 
 3. Materias habilitadas en una carrera: dada una carrera y un estudiante, conocer todas las materias de esa carrera a las que se puede inscribir el estudiante, teniendo en cuenta todas las restricciones del punto 1.
+
+
+
+
 
 
 
@@ -148,6 +187,7 @@ Además, se determinan los siguientes requisitos:
 
 Andy es una persona estudiante que está inscripta en la carrera de Programación y tiene aprobado obj1 con 10 y mate1 con 10.
 
+
 1. Verificar que Alex podría inscribirse a Objetos 2, pues tiene aprobadas Objetos 1 y Matemática 1, además de estar en la carrera de programación.
 2. Verificar que en la carrera de Programación, las materias a las que puede inscribirse Alex son epl, obj2 y bd 
 3. Verificar que en la carrera de TUESS, la única materia en que se puede inscribirse Alex es MEyA.
@@ -161,6 +201,16 @@ Andy es una persona estudiante que está inscripta en la carrera de Programació
 11. Intentar inscribir a Alex nuevamente en Obj2, no se puede porque ya está inscripta  
 12. Realizar la inscripción de Andy a Obj2.
 13. Verificar que las personas estudiantes inscriptas en Obj2 son Alex y Andy
+
+
+
+
+
+
+
+
+
+
 
 
 ## Parte 4: Distintos tipos de requisitos
@@ -180,8 +230,7 @@ Cada materia tiene sólo uno de estos tipos de requisitos: correlativas, crédit
 ### Casos de prueba
 
 #### Correlativas y Sin requisitos
-    Los casos de prueba desarrollados en los puntos anteriores deberían seguir funcionando usando las opciones "sinRequisitos" y "correlativas"
-    según corresponda.
+    Los casos de prueba desarrollados en los puntos anteriores deberían seguir funcionando usando las opciones "sinRequisitos" y "correlativas" según corresponda.
     El año y créditos de las materias son indistintos para estas pruebas, pudiendo usarse cualquier valor por defecto.
 
 #### Créditos y Año
@@ -199,8 +248,7 @@ Cada materia tiene sólo uno de estos tipos de requisitos: correlativas, crédit
     - mate1: año 1 créditos 8
     - Bases de Datos: año 1 créditos 8
     
-    Inscribir a Andy en la carrera TO. Además Andy debería estar inscripta, al igual que en un test anterior, en programación,
-    con las materias obj1 y mate1 cursadas ambas con nota 10.
+    Inscribir a Andy en la carrera TO. Además Andy debería estar inscripta, al igual que en un test anterior, en programación, con las materias obj1 y mate1 cursadas ambas con nota 10.
 
     - verificar que las únicas materias  a las que se puede inscribir Andy en TO son LEA y Ciencias de la Salud
     - registrar que Andy cursó LEA con nota 10 (Andy tiene 8 créditos en TO, no aprobó aún 1er año de TO)
@@ -214,10 +262,29 @@ Cada materia tiene sólo uno de estos tipos de requisitos: correlativas, crédit
     - verificar que la lista de estudiantes inscriptos a Psicología está compuesta solo por Andy
     - verificar que la lista de estudiantes de Sociología está compuesta solo por Andy
     
+
+
+
+
+
+
+
+
+
+    
 ## Parte 5: Reflexiones sobre la solución
     - Realizar un diagrama dinámico que muestre la relación entre Alex, sus materias cursadas (con la nota) e inscriptas de acuerdo al caso de prueba del punto 3
     - Realizar un diagrama estático que muestre los tipos/clases involucrados que se ven en el diagrama dinámico del punto anterior
     - Mostrar un diagrama estático que refleje el polimorfismo usado en el punto 4 (requisitos de la materia). Aclarar en texto cuál es el mensaje polimórfico, quién es el emisor del mensaje y cuáles son los objetos autodefinidos o clases que lo implementan.
+
+
+
+
+
+
+
+
+
 
 
 # BONUS
