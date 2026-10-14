@@ -248,8 +248,7 @@ Cada materia tiene sólo uno de estos tipos de requisitos: correlativas, crédit
     - mate1: año 1 créditos 8
     - Bases de Datos: año 1 créditos 8
     
-    Inscribir a Andy en la carrera TO. Además Andy debería estar inscripta, al igual que en un test anterior, en programación,
-    con las materias obj1 y mate1 cursadas ambas con nota 10.
+    Inscribir a Andy en la carrera TO. Además Andy debería estar inscripta, al igual que en un test anterior, en programación, con las materias obj1 y mate1 cursadas ambas con nota 10.
 
     - verificar que las únicas materias  a las que se puede inscribir Andy en TO son LEA y Ciencias de la Salud
     - registrar que Andy cursó LEA con nota 10 (Andy tiene 8 créditos en TO, no aprobó aún 1er año de TO)

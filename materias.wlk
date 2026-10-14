@@ -131,7 +131,7 @@ class Estudiante {
 
 
   method aproboTodosLosRequisitosDe(materia) {
-    return materia.requisitos().all({requisito => self.aproboLaMateria(requisito)})
+    return materia.cumpleRequisitos(self)
   }
 
 
@@ -152,8 +152,8 @@ class Estudiante {
   }
 
 
-  method creditosObtenidos(){
-    return historiaAcadémica.creditosTotales()
+  method creditosObtenidos(carrera){
+    return historiaAcadémica.creditosDeLaCarrera(carrera)
   }
 
  
@@ -191,9 +191,21 @@ class Materia {
 
     const property añoDeCarrera
 
+    var carrera = null
 
-    //method cumpleRequisitos(estudiante) {
-    //return requisito.cumplePara(estudiante, self)}
+
+    method carrera() {
+      return carrera
+    }
+
+
+    method carrera(unaCarrera) {
+     carrera = unaCarrera
+    }
+
+
+    method cumpleRequisitos(estudiante) {
+      return requisito.cumplePara(estudiante, self)}
   
   
 
@@ -205,6 +217,9 @@ class Materia {
     method estudiantesInscriptos(){
       return estudiantesInscriptos
     }
+
+
+
 
 }
 
@@ -238,7 +253,7 @@ class HistoriaAcadémica {
 
   const property inscriptoEnMaterias = #{}
 
-  var creditosTotales = 0
+  // var creditosTotales = 0
 
 
 
@@ -250,7 +265,7 @@ class HistoriaAcadémica {
   method registrarCursada(cursada){
     if (cursada.estaAprobada()){
       materiasAprobadas.add(cursada.materia())
-      creditosTotales += cursada.materia().creditosQueOtorga()   
+      // creditosTotales += cursada.materia().creditosQueOtorga()   
     }
     cursadas.add(cursada)
     inscriptoEnMaterias.remove(cursada.materia())
@@ -297,9 +312,14 @@ class HistoriaAcadémica {
   }
 
 
-  method creditosTotales(){
-    return creditosTotales
+  method creditosDeLaCarrera(carrera){
+    return self.materiasAprobadasDeLaCarrera(carrera).sum({materia => materia.creditosQueOtorga()})
   }
+
+
+  //method creditosTotales(){
+  //  return creditosTotales
+  //}
 
 
  
@@ -309,9 +329,9 @@ class HistoriaAcadémica {
 
 
 
-object correlativas{
+class Correlativas{
 
-  var property materiasCorrelativas = #{}
+  const materiasCorrelativas 
 
 
   method cumplePara(estudiante, materia) {
@@ -324,22 +344,13 @@ object correlativas{
 
 
 
-object creditos{
+class Creditos{
 
-  var creditosNecesarios = 0
+  const creditosNecesarios 
 
 
   method cumplePara(estudiante, materia) {
-    return estudiante.creditosObtenidos() >= self.creditosNecesarios()
-  }
-
-
-  method creditosNecesarios(){
-    return creditosNecesarios
-  }
-
-  method creditosNecesarios(_creditos){
-    creditosNecesarios = _creditos
+    return estudiante.creditosObtenidos(materia.carrera()) >= creditosNecesarios
   }
 
 }
@@ -348,13 +359,14 @@ object creditos{
 
 
 
-object porAño{
+
+
+class PorAño{
 
 
   method cumplePara(estudiante, materia){
     return materia.carrera().materias().filter({otraMateria => otraMateria.añoDeCarrera() == materia.añoDeCarrera() - 1}).all({materiaAnterior => estudiante.aproboLaMateria(materiaAnterior)})
   }
-
   
 
 }

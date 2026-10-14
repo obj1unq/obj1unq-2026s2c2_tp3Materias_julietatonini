@@ -2,101 +2,112 @@ import materias.*
 
 describe "tests de materias" {
 
-  const epl = new Materia(
-    requisito = sinRequisitos,
-    creditosQueOtorga = 0,
-    añoDeCarrera = 0
-  )
+  
+const epl = new Materia(
+  requisito = sinRequisitos,
+  creditosQueOtorga = 0,
+  añoDeCarrera = 0
+)
 
-  const mate1 = new Materia(
-    requisito = sinRequisitos,
-    creditosQueOtorga = 8,
-    añoDeCarrera = 1
-  )
+const mate1 = new Materia(
+  requisito = sinRequisitos,
+  creditosQueOtorga = 8,
+  añoDeCarrera = 1
+)
 
-  const objetos1 = new Materia(
-    requisito = sinRequisitos,
-    creditosQueOtorga = 8,
-    añoDeCarrera = 1
-  )
+const objetos1 = new Materia(
+  requisito = sinRequisitos,
+  creditosQueOtorga = 8,
+  añoDeCarrera = 1
+)
 
-  const objetos2 = new Materia(
-    requisito = sinRequisitos,
-    creditosQueOtorga = 0,
-    añoDeCarrera = 0
-  )
 
-  const objetos3 = new Materia(
-    requisito = sinRequisitos,
-    creditosQueOtorga = 0,
-    añoDeCarrera = 0
-  )
+const objetos2 = new Materia(
+  requisito = new Correlativas(
+    materiasCorrelativas = #{objetos1, mate1}
+  ),
+  creditosQueOtorga = 0,
+  añoDeCarrera = 0
+)
 
-  const baseDeDatos = new Materia(
-    requisito = sinRequisitos,
-    creditosQueOtorga = 8,
-    añoDeCarrera = 1
-  )
+const objetos3 = new Materia(
+  requisito = new Correlativas(
+    materiasCorrelativas = #{objetos2, baseDeDatos}
+  ),
+  creditosQueOtorga = 0,
+  añoDeCarrera = 0
+)
 
-  const pConc = new Materia(
-    requisito = sinRequisitos,
-    creditosQueOtorga = 0,
-    añoDeCarrera = 0
-  )
+const baseDeDatos = new Materia(
+  requisito = sinRequisitos,
+  creditosQueOtorga = 8,
+  añoDeCarrera = 1
+)
 
-  const mEyA = new Materia(
-    requisito = sinRequisitos,
-    creditosQueOtorga = 0,
-    añoDeCarrera = 0
-  )
 
-  const tyS = new Materia(
-    requisito = sinRequisitos,
-    creditosQueOtorga = 0,
-    añoDeCarrera = 0
-  )
+const pConc = new Materia(
+  requisito = new Correlativas(
+    materiasCorrelativas = #{objetos1, baseDeDatos}
+  ),
+  creditosQueOtorga = 0,
+  añoDeCarrera = 0
+)
 
-  const economia = new Materia(
-    requisito = sinRequisitos,
-    creditosQueOtorga = 0,
-    añoDeCarrera = 0
-  )
+const mEyA = new Materia(
+  requisito = sinRequisitos,
+  creditosQueOtorga = 0,
+  añoDeCarrera = 0
+)
 
-  const desarrolloLocal = new Materia(
-    requisito = sinRequisitos,
-    creditosQueOtorga = 0,
-    añoDeCarrera = 0
-  )
+const tyS = new Materia(
+  requisito = sinRequisitos,
+  creditosQueOtorga = 0,
+  añoDeCarrera = 0
+)
 
-  const lEA = new Materia(
-    requisito = sinRequisitos,
-    creditosQueOtorga = 8,
-    añoDeCarrera = 1
-  )
+const economia = new Materia(
+  requisito = sinRequisitos,
+  creditosQueOtorga = 0,
+  añoDeCarrera = 0
+)
 
-  const cienciasSalud = new Materia(
-    requisito = sinRequisitos,
-    creditosQueOtorga = 8,
-    añoDeCarrera = 1
-  )
+const desarrolloLocal = new Materia(
+  requisito = new Correlativas(
+    materiasCorrelativas = #{mEyA}
+  ),
+  creditosQueOtorga = 0,
+  añoDeCarrera = 0
+)
 
-  const psicologia = new Materia(
-    requisito = porAño,
-    creditosQueOtorga = 4,
-    añoDeCarrera = 2
-  )
+const lEA = new Materia(
+  requisito = sinRequisitos,
+  creditosQueOtorga = 8,
+  añoDeCarrera = 1
+)
 
-  const antropologia = new Materia(
-    requisito = creditos,    //8
-    creditosQueOtorga = 4,
-    añoDeCarrera = 2
-  )
+const cienciasSalud = new Materia(
+  requisito = sinRequisitos,
+  creditosQueOtorga = 8,
+  añoDeCarrera = 1
+)
 
-  const sociologia = new Materia(
-    requisito = creditos,       //10
-    creditosQueOtorga = 8,
-    añoDeCarrera = 3
-  )
+const psicologia = new Materia(
+  requisito = new PorAño(),
+  creditosQueOtorga = 4,
+  añoDeCarrera = 2
+)
+
+const antropologia = new Materia(
+  requisito = new Creditos(creditosNecesarios = 8),
+  creditosQueOtorga = 4,
+  añoDeCarrera = 2
+)
+
+const sociologia = new Materia(
+  requisito = new Creditos(creditosNecesarios = 10),
+  creditosQueOtorga = 8,
+  añoDeCarrera = 3
+)
 
 
 
@@ -121,8 +132,26 @@ describe "tests de materias" {
   var andy = new Estudiante()
 
 
+
+
+
+
   method initialize() {
     alex = new Estudiante()
+
+
+    programación.materias().forEach({materia =>
+  materia.carrera(programación)
+})
+
+tecEconomia.materias().forEach({materia =>
+  materia.carrera(tecEconomia)
+})
+
+terapiaO.materias().forEach({materia =>
+  materia.carrera(terapiaO)
+})
+
 
     alex.inscribirseACarrera(programación)
     alex.inscribirseACarrera(tecEconomia)
@@ -133,17 +162,14 @@ describe "tests de materias" {
     alex.finalizarLaCursada(tyS, 8)
     alex.finalizarLaCursada(mate1, 8)
     alex.finalizarLaCursada(baseDeDatos, 2)
-    objetos2.requisitos(#{objetos1, mate1})
-    objetos3.requisitos(#{objetos2, baseDeDatos})
-    pConc.requisitos(#{objetos1, baseDeDatos})
-    desarrolloLocal.requisitos(#{mEyA})
-
+    
     andy = new Estudiante()
 
     andy.inscribirseACarrera(programación)
 
     andy.finalizarLaCursada(objetos1, 10)
     andy.finalizarLaCursada(mate1, 10)
+
   }
 
 
@@ -229,5 +255,18 @@ describe "tests de materias" {
   test "parte 4: distintos tipos de requisitos"{
     andy.inscribirseACarrera(terapiaO)
     assert.equals(#{lEA, cienciasSalud}, andy.materiasHabilitadasDeLaCarrera(terapiaO))
+    andy.finalizarLaCursada(lEA, 10)
+    assert.equals(8, andy.creditosObtenidos(terapiaO))
+    assert.equals(#{antropologia, cienciasSalud}, andy.materiasHabilitadasDeLaCarrera(terapiaO))
+    andy.finalizarLaCursada(antropologia, 10)
+    assert.equals(12, andy.creditosObtenidos(terapiaO))
+    assert.equals(#{sociologia, cienciasSalud}, andy.materiasHabilitadasDeLaCarrera(terapiaO))
+    andy.finalizarLaCursada(cienciasSalud, 10)
+    assert.equals(20, andy.creditosObtenidos(terapiaO))
+    assert.equals(#{sociologia, psicologia}, andy.materiasHabilitadasDeLaCarrera(terapiaO))
+    andy.inscribirAMateria(psicologia)
+    andy.inscribirAMateria(sociologia)
+    assert.equals(#{andy}, psicologia.estudiantesInscriptos())
+    assert.equals(#{andy}, sociologia.estudiantesInscriptos())
   }
 }
